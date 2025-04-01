@@ -108,9 +108,25 @@ There are some standard global variables defined in the OpenBricks module:
 **openbricks_resolution** is used to set the resolution for rounding the corners of bricks when **texture_type** is set to *"r"*. Default value is *15*. The higher the number the higher the rounding quality rendering is.<br>
 **openbricks_file_prefix** configures where the textures for the brick surfaces are located. The Code will add a seuence number plus the ".dat" file extension. Default value is *"textures/texture"*<br>
 
+## Example pattern
+
+One of the simplest patterns you can make with **repeat_brick_pattern** set to **true** is as follows:
+
+    // Strecher bond:
+    my_brick_pattern = [ "sSh", "hSs" ]
+
+Which will give you a wall with only stretchers that are half laid on top of each other by alternating the start of the row with a stretcher or a header brick. This is what's called a *stretcher bond*. Notice the use of the Corner stretcher ("s") and corner header ("h") in the first and last position in each of the two pattern strings. Even though **repeat_brick_pattern** is set to **true** these corner types in their placement within the pattern string ensures they are not repeated as part of the brick pattern within the row itself. If **wall_width** is not a proper brick length the module will generate an odd sided brick (shown in purple in the OpenSCAD preview window) before it places the final corner brick.
+
+    // Common Bond (Flemish every 6th):
+    my_brick_pattern = [ "sSh", "hSs", "sSh", "hSs","sSh", "hQSHs" ];
+
+The *Common Bond* pattern above will create a stretcher bond for 5 rows followed by a row of Flemmish Bond. The Flemmish Bond row starts with a Queen Closer brick ("Q") in the second position of the pattern ensures the Header brick ("H") will be always centered over the mortar line between two stretcher bricks ion the row below. Note that the Queen Closer brick is not repeated as part of the pattern since it's an *Lap/Offset* type brick and in the second position. If you placed the Queen Closer brick between the Stretcher and Header bricks in the pattern it would repeat and the bond would not be a Flemmish Bond anymore. 
+
+The best way to figure out how openbricks works is to copy the example code below and play with the my_brick_pattern array of strings. Set the dimensions of the wall not too large and create a pattern. Toggle on/off the **reapeat_brick_pattern** argument to openbricks() and see how that influences the generation of the wall. Then play with adding different types of bricks in the various pattern strings. Add more strings to the array to see how the amount of pattern strings influences the pattern of bricks in the wall.
+
 ## Example Usage
 
-The below code snippet shows an example of a wall being generated with different types of bonds and bricks and a wall opening for a window. We scale this down to milimeters via scale(25.4) before scaling it down to HO scale (1:87). 
+The below code snippet shows a complex example of a wall being generated with different types of bonds and bricks and a wall opening for a window. We scale this down to milimeters via scale(25.4) before scaling it down to HO scale (1:87). 
 
     //////////////////////////////////////
     // Example use of openbricks module //
