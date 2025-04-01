@@ -20,7 +20,7 @@ openbricks( wall_length, wall_height, brick_pattern, standard_brick_length, stan
 
 Make sure the standard brick length/width are a proper ratio of each other or it'll be difficult to generate proper repeating bonds and/or mortar lines will align resulting in a bad looking bond.
 
-[![Brick dimension ratios](https://en.wikipedia.org/wiki/Brickwork#/media/File:Brick_laying_2.jpg "Brick dimension ratios")](https://en.wikipedia.org/wiki/Brickwork#/media/File:Brick_laying_2.jpg)
+<img src="https://en.wikipedia.org/wiki/Brickwork#/media/File:Brick_laying_2.jpg" alt="Brick dimension ratio">
 
 ## Patterns
 
