@@ -103,10 +103,80 @@ NOTE: Even if **texture_type** is set to "t", Quoin bricks will not get a textur
 
 There are some standard global variables defined in the OpenBricks module:
 
-**openbricks_eps** is used throughout the code to ensure objects properly overlap for making unions. Default value is *0.001*.
-**openbricks_radius** is used as the radius for drawing the rounded bricks when **texture_type** is set to "r". Default values is *0.25*
-**openbricks_resolution** is used to set the resolution for rounding the corners of bricks when **texture_type** is set to *"r"*. Default value is *15*. The higher the number the higher the rounding quality rendering is. = 15; // Used as resolution for rounding bricks
-**openbricks_file_prefix** configures where the textures for the brick surfaces are located. The Code will add a seuence number plus the ".dat" file extension. Default value is *"textures/texture"*
+**openbricks_eps** is used throughout the code to ensure objects properly overlap for making unions. Default value is *0.001*.<br>
+**openbricks_radius** is used as the radius for drawing the rounded bricks when **texture_type** is set to "r". Default values is *0.25*<br>
+**openbricks_resolution** is used to set the resolution for rounding the corners of bricks when **texture_type** is set to *"r"*. Default value is *15*. The higher the number the higher the rounding quality rendering is.<br>
+**openbricks_file_prefix** configures where the textures for the brick surfaces are located. The Code will add a seuence number plus the ".dat" file extension. Default value is *"textures/texture"*<br>
 
-## Example Patterns
-**to be added**
+## Example Usage
+
+The below code snippet shows an example of a wall being generated with different types of bonds and bricks and a wall opening for a window. We scale this down to milimeters via scale(25.4) before scaling it down to HO scale (1:87). 
+
+    //////////////////////////////////////
+    // Example use of openbricks module //
+    //////////////////////////////////////
+    
+    use <openbricks.scad>;
+    
+    // Quoin corners with window opening:
+    my_brick_pattern = [
+    "XHSSSSSHZ",
+    "xSSSSSSz",
+    "ZSSSSSSB",
+    "zHSSSSSHb",
+    "BSSSSSSHQb",
+    "bQSHSHSHSHHb",
+    "bHSHHSHHSHHQb",
+    "bQSHHSHHSSHb",
+    "bHSSrrrrrrSGZ",
+    "bSSHttttttGSz",
+    "ZSHQttttttSSoX",
+    "zQSHttttttoSSx",
+    "hQHSSttttttQGSQs",
+    "sSSQttttttSGSh",
+    "hQHSSttttttQGSQs",
+    "sSSQttttttSGSh",
+    "hQHSSttttttQGSQs",
+    "sSSQttttttSGSh",
+    "hQHSSKKKKKKQGSQs",
+    "sSSQkkkkkkGSSh",
+    "hQHSSkkkkkkQGSQs",
+    "sYSSSSSMmYyh",
+    "hSSSSSSHQs",
+    "sYSSSSSMmYyh",
+    ];
+    
+    // Repeat the brick pattern until wall width is reached:
+    repeat_brick_pattern = false;
+    
+    // Brick dimensions in inches:
+    std_mortar_width = (3/8);
+    std_brick_width   = 7+(5/8);
+    std_brick_height  = 2.25;
+    std_brick_depth   = 3+(5/8);
+    
+    // Mortar depth as a factor of std_brick_depth:
+    std_mortar_depth = 0.7;
+    
+    // Width of wall in inches:
+    my_wall_width = 8*12;
+    
+    my_wall_rows = 24;
+    
+    // Height of wall in inches calculated from my_wall_rows:
+    my_wall_height = (std_brick_height*my_wall_rows)+(std_mortar_width*(my_wall_rows-1));
+    
+    // Add texture (t) or round bricks (r) or normal (n) bricks:
+    my_texture = "n";
+    
+    //////////
+    // MAIN //
+    //////////
+    
+    scale(25.4)  // Printing scale (to millimeters)
+      scale(1/87)  // Modeling scale (HO)
+      openbricks( my_wall_width, my_wall_height, my_brick_pattern, std_brick_width, std_brick_height, std_brick_depth, std_mortar_width, std_mortar_depth, repeat_brick_pattern, my_texture );
+    
+    // [EOF]
+
+
