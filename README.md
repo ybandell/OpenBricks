@@ -4,7 +4,7 @@ OpenBricks is an OpenSCAD module that allows you to draw a wall with a specific 
 The idea for this module was taken from the .NET "Bricks Arch" program by the Beckenham and West Wickham Model Railway Club ( http://www.bwwmrc.co.uk/bricks/index.shtml )
 
 ## Usage
-openbricks( wall_length, wall_height, brick_pattern, standard_brick_length, standard_brick_height, standard_brick_width, standard_mortar_length, standard_mortar_width, repeat_brick_pattern , texture_type);
+openbricks( wall_length, wall_height, brick_pattern, standard_brick_length, standard_brick_height, standard_brick_width, standard_mortar_width, standard_mortar_depth, repeat_brick_pattern , texture_type);
 | Parameter | Description |
 | :--- | :--- |
 | wall_length | The total length of the wall to be generated |
@@ -13,8 +13,8 @@ openbricks( wall_length, wall_height, brick_pattern, standard_brick_length, stan
 | standard_brick_length | Length of the bricks to create |
 | standard_brick_height | Height of the bricks to create |
 | standard_brick_width | Width of the bricks to create |
-| standard_mortar_length | |
-| standard_mortar_width | |
+| standard_mortar_width | Width/Height of a mortar line between two bricks |
+| standard_mortar_depth | Factor of brick height used to generate the mortar lines below the front of the brick  |
 | repeat_brick_pattern | true: repeat pattern to match wall_length,<br>false: don't repeat the pattern for wall length. Wall can end up being be shorter than specified wall_length |
 | texture_type | "n": simple cubes,<br>"r": cubes with rounded corners and vertices,<br>"t": add random texture to face of bricks |
 
